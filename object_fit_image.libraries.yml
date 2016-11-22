@@ -1,0 +1,11 @@
+object_fit_image:
+  css:
+    component:
+      css/object-fit-image.css: {}
+  js:
+    js/object-fit-image.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    - core/drupalSettings
