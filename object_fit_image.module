@@ -48,7 +48,7 @@ function object_fit_image_theme() {
  * Prepares variables for object fit image formatter templates.
  *
  * Default template: object-fit-image-formatter.html.twig.
- * 
+ *
  * @param array $variables
  *   An associative array containing:
  *   - item: An ImageItem object.
@@ -59,15 +59,11 @@ function object_fit_image_theme() {
  */
 function template_preprocess_object_fit_image_formatter(&$variables) {
   $style = ImageStyle::load($variables['image_style']);
-
   // Determine the dimensions of the styled image.
   $dimensions = array(
     'width' => $variables['width'],
     'height' => $variables['height'],
   );
-
-  $style->transformDimensions($dimensions, $variables['uri']);
-
 
   $variables['object_fit_image'] = array(
     '#theme' => 'image',
@@ -91,12 +87,9 @@ function template_preprocess_object_fit_image_formatter(&$variables) {
   else {
     $variables['object_fit_image']['#uri'] = $item->uri;
   }
-  
-  foreach (array('width', 'height') as $key) {
-    $variables['object_fit_image']["#$key"] = $item->$key;
-  }
 
   if($style) {
+    $style->transformDimensions($dimensions, $variables['uri']);
     $variables['object_fit_image']['#uri'] = $style->buildUrl($variables['object_fit_image']['#uri']);
     $variables['object_fit_image']['#width'] = $dimensions['#width'];
     $variables['object_fit_image']['#height'] = $dimensions['#height'];
